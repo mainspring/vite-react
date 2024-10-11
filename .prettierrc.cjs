@@ -4,7 +4,7 @@ module.exports = {
   singleQuote: true,
   trailingComma: 'all',
   arrowParens: 'avoid',
-  plugins: [require.resolve('@trivago/prettier-plugin-sort-imports'), require.resolve('prettier-plugin-tailwindcss')],
+  plugins: [require.resolve('@trivago/prettier-plugin-sort-imports')],
   importOrderParserPlugins: ['typescript', 'jsx', 'decorators-legacy'],
   importOrder: ['^react(.*)', 'antd/(.*)', '<THIRD_PARTY_MODULES>', '@/(.*)', '^[./]'],
   importOrderSeparation: true,
