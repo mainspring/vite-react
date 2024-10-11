@@ -3,17 +3,11 @@ FROM node:latest AS nodebuild
 ADD . /app-src
 WORKDIR /app-src
 
-# RUN rm .env*
-RUN touch .env.production
+RUN rm src/.env*
+RUN touch src/.env.production
 
-ARG HTTP
-ENV HTTP=${HTTP}
 ARG API_HOST
-ENV API_HOST=${API_HOST}
-ARG SIGNALR_HOST
-ENV SIGNALR_HOST=${SIGNALR_HOST}
-ARG APP_VER
-ENV APP_VER=${APP_VER}
+ENV VITE_API_HOST=${API_HOST}
 
 RUN yarn install
 RUN yarn build

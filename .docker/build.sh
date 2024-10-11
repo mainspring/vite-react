@@ -9,8 +9,8 @@ cd ..
 
 docker build \
     -f .docker/Dockerfile.app.yml \
-    --build-arg HTTP=https \
-    --build-arg API_HOST=api.whatever.com \
+    --build-arg API_HOST=https://api.whatever.com \
     --tag ${IMG} \
     --tag ${IMG}:${TAG} \
+    --progress=plain \
     .
