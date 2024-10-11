@@ -1,0 +1,32 @@
+FROM node:latest AS nodebuild
+
+ADD . /app-src
+WORKDIR /app-src
+
+# RUN rm .env*
+RUN touch .env.production
+
+ARG HTTP
+ENV HTTP=${HTTP}
+ARG API_HOST
+ENV API_HOST=${API_HOST}
+ARG SIGNALR_HOST
+ENV SIGNALR_HOST=${SIGNALR_HOST}
+ARG APP_VER
+ENV APP_VER=${APP_VER}
+
+RUN yarn install
+RUN yarn build
+RUN mv "./dist" /app
+
+## STAGE 2: Production Environment ###
+FROM nginx:1.23.3-alpine
+
+RUN rm -rf /etc/nginx/conf.d
+COPY [".docker/conf", "/etc/nginx"]
+COPY --from=nodebuild /app/index.html /usr/share/nginx/html
+ARG PUBLIC_PATH 
+COPY --from=nodebuild /app /usr/share/nginx/html/${PUBLIC_PATH}
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

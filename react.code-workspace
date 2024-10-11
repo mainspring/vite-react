@@ -1,0 +1,102 @@
+{
+  "folders": [
+    {
+      "path": ".",
+    },
+  ],
+  "settings": {
+    "window.title": "${folderName} ${rootPath}",
+    // DO NOT EXCLUDE tailwind.config.ts or intellisense stops working
+    "files.exclude": {
+      "**/.git": false,
+      "**/.svn": false,
+      "**/.hg": false,
+      "**/CVS": false,
+      "**/.DS_Store": false,
+      "**/Thumbs.db": false,
+      "**/node_modules": false,
+      "**/package-lock.json": false,
+      "**/yarn.lock": false,
+      "**/yarn-error.log": false,
+      "**/dist": false,
+      "**/dev-dist": false,
+      "**/.idea": false,
+      "**/.vs": false,
+      "**/.vscode": false,
+      "*.sh": false,
+      "*.js": false,
+      "*.cjs": false,
+      "tsconfig.*.json": false,
+      "tsconfig.json": false,
+      ".npmrc": false,
+      ".gitignore": false
+    },
+    "search.exclude": {
+      "**/.vscode": true,
+      "**/build": true,
+      "**/dist": true,
+      "**/node_modules": true,
+      "package-lock.json": true,
+      "wwwroot": true,
+    },
+    "[html]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[xml]": {
+      "editor.defaultFormatter": "DotJoshJohnson.xml",
+    },
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[json, jsonc, js]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[typescriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "[scss]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    // other settings
+    "tailwindCSS.includeLanguages": {
+      "javascript": "javascript",
+      "html": "HTML",
+    },
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": false,
+      "strings": true,
+    },
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "editor.codeLens": true,
+    "typescript.tsdk": "./node_modules/typescript/lib",
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit",
+      "source.fixAll.eslint": "explicit",
+    },
+  },
+  "extensions": {
+    "recommendations": [
+      "esbenp.prettier-vscode",
+      "dbaeumer.vscode-eslint",
+      "christian-kohler.path-intellisense",
+      "bradlc.vscode-tailwindcss",
+      "styled-components.vscode-styled-components",
+      "amodio.toggle-excluded-files",
+      "dsznajder.es7-react-js-snippets",
+      "dbaeumer.vscode-eslint",
+      "formulahendry.auto-rename-tag",
+      "benjpas.close-all",
+      "humao.rest-client",
+      "amodio.toggle-excluded-files",
+    ],
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [],
+  },
+}

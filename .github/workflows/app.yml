@@ -1,0 +1,63 @@
+name: React App CI/CD
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/app.yml'
+      - 'src/**'
+    branches:
+      - develop
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+      REPO: 123412341234.dkr.ecr.us-east-1.amazonaws.com
+      IMG: www
+      TAG: v1
+      APIHOST: https://api.whatever.com
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Branch name
+        id: branch
+        run: |
+          echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
+          echo "ENVF=.docker/env.${GITHUB_REF##*/}" >> $GITHUB_OUTPUT
+          echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_OUTPUT
+
+      - name: Load .env file
+        id: dotenv
+        if: steps.branch.outputs.BRANCH != 'main'
+        uses: falti/dotenv-action@v1.0.2
+        with:
+          path: ${{ steps.branch.outputs.ENVF }}
+
+      - name: Set vars
+        if: steps.branch.outputs.BRANCH != 'main'
+        run: |
+          echo "TAG=v6-${GITHUB_REF##*/}" >> $GITHUB_ENV
+          echo "APIHOST=${{ steps.dotenv.outputs.api_host }}" >> $GITHUB_ENV
+
+      - name: Build
+        run: |
+          docker build -f .docker/Dockerfile.app.yml \
+            --build-arg API_HOST=${APIHOST} \
+            --build-arg SIGNALR_HOST=${APIHOST}/hub \
+            --build-arg APP_VER=${TAG} \
+            --tag ${IMG}:${TAG} .
+        continue-on-error: false
+
+      - name: Push Image to ECR
+        id: to-ecr
+        uses: jwalton/gh-ecr-push@v1
+        with:
+          access-key-id: ${{ secrets.ECR_AWS_ACCESS_KEY_ID }}
+          secret-access-key: ${{ secrets.ECR_AWS_ACCESS_KEY_SECRET }}
+          region: us-east-1
+          image: ${IMG}:${TAG}
+        continue-on-error: false

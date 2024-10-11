@@ -1,0 +1,1 @@
+docker run --name vite-react-example -p 3000:80 -d vitereact:v1

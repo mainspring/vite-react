@@ -1,0 +1,58 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+
+    "paths": {
+      // "@/*": ["./src/*"],
+
+      "@core/*": ["./src/core/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@theme/*": ["./src/core/theme/*"],
+
+      "@components": ["./src/components"],
+      "@components/*": ["./src/components/*"],
+
+      "@config": ["./src/core/config"],
+      "@config/*": ["./src/core/config/*"],
+
+      "@contexts/*": ["./src/core/contexts/*"],
+
+      "@pages": ["./src/pages"],
+      "@pages/*": ["./src/pages/*"],
+
+      "@utils": ["./src/core/utils"],
+      "@utils/*": ["./src/core/utils/*"],
+
+      "@types": ["./src/core/types"],
+      "@types/*": ["./src/core/types/*"],
+
+      "@hooks": ["./src/core/hooks"],
+      "@hooks/*": ["./src/core/hooks/*"]
+    },
+
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable", "WebWorker"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src/**/*", "./tailwind.config.ts"],
+  "exclude": ["node_modules", ".apigen"]
+}
